@@ -1,4 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
+const { createClient } = require('@supabase/supabase-js');
 
 // Переменные окружения (будут получены из настроек Vercel)
 const SUPABASE_URL = process.env.SUPABASE_URL;
@@ -15,7 +15,7 @@ const setCorsHeaders = (res) => {
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 };
 
-export default async (req, res) => {
+module.exports = async (req, res) => {
     setCorsHeaders(res);
 
     // Обработка запросов OPTIONS (CORS preflight)
