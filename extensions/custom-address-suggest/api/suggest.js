@@ -46,7 +46,7 @@ export default async (req, res) => {
             .or(
                 `Settlement.ilike.${formattedQuery},NameStreet.ilike.${formattedQuery}`
             ) 
-            .limit(100); 
+            .limit(10); 
 
         if (error) {
             console.error('Supabase Query Error:', error);

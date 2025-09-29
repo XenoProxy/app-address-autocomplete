@@ -3,7 +3,7 @@ import {extension} from '@shopify/ui-extensions/checkout';
 const API_BASE_URL = 'https://app-address-autocomplete.vercel.app/api/suggest'; 
 
 // Поля, для которых мы разрешаем автозаполнение (избегаем ошибки streetName)
-const SUPPORTED_FIELDS = ['address1', 'zip', 'city']; 
+const SUPPORTED_FIELDS = ['address1', 'city']; 
 
 export default extension(
   'purchase.address-autocomplete.suggest',
@@ -21,7 +21,7 @@ export default extension(
       return []; 
     }
 
-    let apiResponseData = [];
+    let apiResponseData = {};
 
     // 2. Выполнение запроса к Vercel API
     try {
@@ -44,18 +44,19 @@ export default extension(
         return [];
     }
 
-    const suggestions = apiResponseData.map((record) => {
+    const suggestions = apiResponseData.map((suggestion) => {
       
       // Текст, который увидит покупатель (на иврите)
-      const suggestionText = `${record.NameStreet}, ${record.Settlement}`;
-
+      const suggestionText = `${suggestion.NameStreet}, ${suggestion.Settlement}`;
       return {
-        suggestion: suggestionText, 
+        id: suggestion.id,
+        matchedSubstrings: suggestionText,
+        // suggestion: suggestionText, 
         
         formattedAddress: {
-          address1: record.NameStreet, 
-          // address2: record.Settlement + ', ' + record.NameStreet + ' ' + record.StreetSymbol,
-          city: record.Settlement,
+          address1: suggestion.NameStreet, 
+          // address2: suggestion.Settlement + ', ' + suggestion.NameStreet + ' ' + suggestion.StreetSymbol,
+          city: suggestion.Settlement,
           countryCode: 'IL',
         },
       };
