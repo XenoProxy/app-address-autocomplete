@@ -5,11 +5,12 @@ const API_BASE_URL = 'https://app-address-autocomplete.vercel.app/api/suggest';
 // Поля, для которых мы разрешаем автозаполнение (избегаем ошибки streetName)
 const SUPPORTED_FIELDS = ['address1','city']; 
 
+
 export default extension(
   'purchase.address-autocomplete.suggest',
   async ({ query, selectedCountryCode, field, signal }) => {
-    
-    const inputValue = query.value;
+
+    let inputValue = query.value;
     console.log('inputValue:', inputValue);
 
     // 1. Проверки безопасности и совместимости
@@ -25,7 +26,7 @@ export default extension(
 
     // 2. Выполнение запроса к Vercel API
     try {
-        const url = `${API_BASE_URL}?query=${encodeURIComponent(inputValue)}`;
+        const url = `${API_BASE_URL}?query=${encodeURIComponent(inputValue)}&field=${field}`;
         const response = await fetch(url, { signal });
         console.log('Fetch response:', response.status);
         
