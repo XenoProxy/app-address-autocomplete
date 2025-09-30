@@ -6,7 +6,6 @@ const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 console.log('Supabase client initialized.', supabase);
-console.log('ввввввввввввв');
 
 // Настройки CORS: разрешаем доступ только вашему dev-магазину Shopify
 const setCorsHeaders = (res) => {

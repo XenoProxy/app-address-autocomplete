@@ -2,7 +2,7 @@
 
 client_id = "03e3131c6701b6b89966bb6ebdc115d4"
 name = "app-address-autocomplete"
-application_url = "https://shopify.dev/apps/default-app-home"
+application_url = "https://sequoialipo-dev-2.myshopify.com/apps/default-app-home"
 embedded = true
 
 [build]
